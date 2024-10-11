@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PropTechModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="amenidades_propiedad">
+    <Key>
+      <PropertyRef Name="id_amenidades_propiedad" />
+    </Key>
+    <Property Name="id_amenidades_propiedad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_propiedad" Type="Int32" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Propiedad" Relationship="Self.FK__amenidade__id_pr__46E78A0C" FromRole="amenidades_propiedad" ToRole="Propiedad" />
+  </EntityType>
+  <EntityType Name="Ciudad">
+    <Key>
+      <PropertyRef Name="id_ciudad" />
+    </Key>
+    <Property Name="id_ciudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_estado" Type="Int32" />
+    <NavigationProperty Name="Estado" Relationship="Self.FK__Ciudad__id_estad__3D5E1FD2" FromRole="Ciudad" ToRole="Estado" />
+    <NavigationProperty Name="Propiedad" Relationship="Self.FK__Propiedad__ciuda__403A8C7D" FromRole="Ciudad" ToRole="Propiedad" />
+  </EntityType>
+  <EntityType Name="Comunicacion">
+    <Key>
+      <PropertyRef Name="id_comunicacion" />
+    </Key>
+    <Property Name="id_comunicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_propiedad" Type="Int32" />
+    <Property Name="asunto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="persona_gestor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nivel_interes" Type="Int32" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="id_contactos" Type="Int32" />
+    <NavigationProperty Name="Contactos" Relationship="Self.FK__Comunicac__id_co__4F7CD00D" FromRole="Comunicacion" ToRole="Contactos" />
+  </EntityType>
+  <EntityType Name="Contactos">
+    <Key>
+      <PropertyRef Name="id_contactos" />
+    </Key>
+    <Property Name="id_contactos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="clasificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comunicacion" Relationship="Self.FK__Comunicac__id_co__4F7CD00D" FromRole="Contactos" ToRole="Comunicacion" />
+    <NavigationProperty Name="Propiedad_Contactos" Relationship="Self.FK__Propiedad__id_co__4BAC3F29" FromRole="Contactos" ToRole="Propiedad_Contactos" />
+  </EntityType>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="id_estado" />
+    </Key>
+    <Property Name="id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_pais" Type="Int32" />
+    <NavigationProperty Name="Ciudad" Relationship="Self.FK__Ciudad__id_estad__3D5E1FD2" FromRole="Estado" ToRole="Ciudad" />
+    <NavigationProperty Name="Pais" Relationship="Self.FK__Estado__id_pais__3A81B327" FromRole="Estado" ToRole="Pais" />
+  </EntityType>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="id_pais" />
+    </Key>
+    <Property Name="id_pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Estado" Relationship="Self.FK__Estado__id_pais__3A81B327" FromRole="Pais" ToRole="Estado" />
+  </EntityType>
+  <EntityType Name="Propiedad">
+    <Key>
+      <PropertyRef Name="id_propiedad" />
+    </Key>
+    <Property Name="id_propiedad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="terreno" Type="Double" />
+    <Property Name="ciudad" Type="Int32" />
+    <Property Name="num_cuartos" Type="Int32" />
+    <Property Name="num_baños" Type="Int32" />
+    <Property Name="num_pisos" Type="Int32" />
+    <NavigationProperty Name="amenidades_propiedad" Relationship="Self.FK__amenidade__id_pr__46E78A0C" FromRole="Propiedad" ToRole="amenidades_propiedad" />
+    <NavigationProperty Name="Ciudad1" Relationship="Self.FK__Propiedad__ciuda__403A8C7D" FromRole="Propiedad" ToRole="Ciudad" />
+    <NavigationProperty Name="Propiedad_Contactos" Relationship="Self.FK__Propiedad__id_pr__4CA06362" FromRole="Propiedad" ToRole="Propiedad_Contactos" />
+    <NavigationProperty Name="Usuario_Propiedades" Relationship="Self.FK__Usuario_P__id_pr__440B1D61" FromRole="Propiedad" ToRole="Usuario_Propiedades" />
+  </EntityType>
+  <EntityType Name="Propiedad_Contactos">
+    <Key>
+      <PropertyRef Name="id_propiedad_contactos" />
+    </Key>
+    <Property Name="id_propiedad_contactos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_contactos" Type="Int32" />
+    <Property Name="id_propiedad" Type="Int32" />
+    <NavigationProperty Name="Contactos" Relationship="Self.FK__Propiedad__id_co__4BAC3F29" FromRole="Propiedad_Contactos" ToRole="Contactos" />
+    <NavigationProperty Name="Propiedad" Relationship="Self.FK__Propiedad__id_pr__4CA06362" FromRole="Propiedad_Contactos" ToRole="Propiedad" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuario_Propiedades" Relationship="Self.FK__Usuario_P__id_us__4316F928" FromRole="Usuario" ToRole="Usuario_Propiedades" />
+  </EntityType>
+  <EntityType Name="Usuario_Propiedades">
+    <Key>
+      <PropertyRef Name="id_usuario_propiedad" />
+    </Key>
+    <Property Name="id_usuario_propiedad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="id_propiedad" Type="Int32" />
+    <NavigationProperty Name="Propiedad" Relationship="Self.FK__Usuario_P__id_pr__440B1D61" FromRole="Usuario_Propiedades" ToRole="Propiedad" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario_P__id_us__4316F928" FromRole="Usuario_Propiedades" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK__amenidade__id_pr__46E78A0C">
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="0..1" />
+    <End Role="amenidades_propiedad" Type="Self.amenidades_propiedad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Principal>
+      <Dependent Role="amenidades_propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ciudad__id_estad__3D5E1FD2">
+    <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="id_estado" />
+      </Principal>
+      <Dependent Role="Ciudad">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Propiedad__ciuda__403A8C7D">
+    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudad">
+        <PropertyRef Name="id_ciudad" />
+      </Principal>
+      <Dependent Role="Propiedad">
+        <PropertyRef Name="ciudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comunicac__id_co__4F7CD00D">
+    <End Role="Contactos" Type="Self.Contactos" Multiplicity="0..1" />
+    <End Role="Comunicacion" Type="Self.Comunicacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contactos">
+        <PropertyRef Name="id_contactos" />
+      </Principal>
+      <Dependent Role="Comunicacion">
+        <PropertyRef Name="id_contactos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Propiedad__id_co__4BAC3F29">
+    <End Role="Contactos" Type="Self.Contactos" Multiplicity="0..1" />
+    <End Role="Propiedad_Contactos" Type="Self.Propiedad_Contactos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contactos">
+        <PropertyRef Name="id_contactos" />
+      </Principal>
+      <Dependent Role="Propiedad_Contactos">
+        <PropertyRef Name="id_contactos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Estado__id_pais__3A81B327">
+    <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+    <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="id_pais" />
+      </Principal>
+      <Dependent Role="Estado">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Propiedad__id_pr__4CA06362">
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="0..1" />
+    <End Role="Propiedad_Contactos" Type="Self.Propiedad_Contactos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Principal>
+      <Dependent Role="Propiedad_Contactos">
+        <PropertyRef Name="id_propiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario_P__id_pr__440B1D61">
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="0..1" />
+    <End Role="Usuario_Propiedades" Type="Self.Usuario_Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Principal>
+      <Dependent Role="Usuario_Propiedades">
+        <PropertyRef Name="id_propiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario_P__id_us__4316F928">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario_Propiedades" Type="Self.Usuario_Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Usuario_Propiedades">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PropTechEntitiesDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="amenidades_propiedad" EntityType="Self.amenidades_propiedad" />
+    <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
+    <EntitySet Name="Comunicacion" EntityType="Self.Comunicacion" />
+    <EntitySet Name="Contactos" EntityType="Self.Contactos" />
+    <EntitySet Name="Estado" EntityType="Self.Estado" />
+    <EntitySet Name="Pais" EntityType="Self.Pais" />
+    <EntitySet Name="Propiedad" EntityType="Self.Propiedad" />
+    <EntitySet Name="Propiedad_Contactos" EntityType="Self.Propiedad_Contactos" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="Usuario_Propiedades" EntityType="Self.Usuario_Propiedades" />
+    <AssociationSet Name="FK__amenidade__id_pr__46E78A0C" Association="Self.FK__amenidade__id_pr__46E78A0C">
+      <End Role="Propiedad" EntitySet="Propiedad" />
+      <End Role="amenidades_propiedad" EntitySet="amenidades_propiedad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ciudad__id_estad__3D5E1FD2" Association="Self.FK__Ciudad__id_estad__3D5E1FD2">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Ciudad" EntitySet="Ciudad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Propiedad__ciuda__403A8C7D" Association="Self.FK__Propiedad__ciuda__403A8C7D">
+      <End Role="Ciudad" EntitySet="Ciudad" />
+      <End Role="Propiedad" EntitySet="Propiedad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comunicac__id_co__4F7CD00D" Association="Self.FK__Comunicac__id_co__4F7CD00D">
+      <End Role="Contactos" EntitySet="Contactos" />
+      <End Role="Comunicacion" EntitySet="Comunicacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Propiedad__id_co__4BAC3F29" Association="Self.FK__Propiedad__id_co__4BAC3F29">
+      <End Role="Contactos" EntitySet="Contactos" />
+      <End Role="Propiedad_Contactos" EntitySet="Propiedad_Contactos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Estado__id_pais__3A81B327" Association="Self.FK__Estado__id_pais__3A81B327">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Estado" EntitySet="Estado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Propiedad__id_pr__4CA06362" Association="Self.FK__Propiedad__id_pr__4CA06362">
+      <End Role="Propiedad" EntitySet="Propiedad" />
+      <End Role="Propiedad_Contactos" EntitySet="Propiedad_Contactos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario_P__id_pr__440B1D61" Association="Self.FK__Usuario_P__id_pr__440B1D61">
+      <End Role="Propiedad" EntitySet="Propiedad" />
+      <End Role="Usuario_Propiedades" EntitySet="Usuario_Propiedades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario_P__id_us__4316F928" Association="Self.FK__Usuario_P__id_us__4316F928">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario_Propiedades" EntitySet="Usuario_Propiedades" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PropTechModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="amenidades_propiedad">
+    <Key>
+      <PropertyRef Name="id_amenidades_propiedad" />
+    </Key>
+    <Property Name="id_amenidades_propiedad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_propiedad" Type="int" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Ciudad">
+    <Key>
+      <PropertyRef Name="id_ciudad" />
+    </Key>
+    <Property Name="id_ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_ciudad" Type="varchar" MaxLength="50" />
+    <Property Name="id_estado" Type="int" />
+  </EntityType>
+  <EntityType Name="Comunicacion">
+    <Key>
+      <PropertyRef Name="id_comunicacion" />
+    </Key>
+    <Property Name="id_comunicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_propiedad" Type="int" />
+    <Property Name="asunto" Type="varchar" MaxLength="50" />
+    <Property Name="persona_gestor" Type="varchar" MaxLength="50" />
+    <Property Name="nivel_interes" Type="int" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="id_contactos" Type="int" />
+  </EntityType>
+  <EntityType Name="Contactos">
+    <Key>
+      <PropertyRef Name="id_contactos" />
+    </Key>
+    <Property Name="id_contactos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="telefono" Type="varchar" MaxLength="12" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="clasificacion" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="id_estado" />
+    </Key>
+    <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_estado" Type="varchar" MaxLength="50" />
+    <Property Name="id_pais" Type="int" />
+  </EntityType>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="id_pais" />
+    </Key>
+    <Property Name="id_pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_pais" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Propiedad">
+    <Key>
+      <PropertyRef Name="id_propiedad" />
+    </Key>
+    <Property Name="id_propiedad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="80" />
+    <Property Name="terreno" Type="float" />
+    <Property Name="ciudad" Type="int" />
+    <Property Name="num_cuartos" Type="int" />
+    <Property Name="num_baños" Type="int" />
+    <Property Name="num_pisos" Type="int" />
+  </EntityType>
+  <EntityType Name="Propiedad_Contactos">
+    <Key>
+      <PropertyRef Name="id_propiedad_contactos" />
+    </Key>
+    <Property Name="id_propiedad_contactos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_contactos" Type="int" />
+    <Property Name="id_propiedad" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="correo" Type="varchar" MaxLength="50" />
+    <Property Name="contraseña" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Usuario_Propiedades">
+    <Key>
+      <PropertyRef Name="id_usuario_propiedad" />
+    </Key>
+    <Property Name="id_usuario_propiedad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_usuario" Type="int" />
+    <Property Name="id_propiedad" Type="int" />
+  </EntityType>
+  <Association Name="FK__amenidade__id_pr__46E78A0C">
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="0..1" />
+    <End Role="amenidades_propiedad" Type="Self.amenidades_propiedad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Principal>
+      <Dependent Role="amenidades_propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ciudad__id_estad__3D5E1FD2">
+    <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="id_estado" />
+      </Principal>
+      <Dependent Role="Ciudad">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comunicac__id_co__4F7CD00D">
+    <End Role="Contactos" Type="Self.Contactos" Multiplicity="0..1" />
+    <End Role="Comunicacion" Type="Self.Comunicacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contactos">
+        <PropertyRef Name="id_contactos" />
+      </Principal>
+      <Dependent Role="Comunicacion">
+        <PropertyRef Name="id_contactos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Estado__id_pais__3A81B327">
+    <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+    <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="id_pais" />
+      </Principal>
+      <Dependent Role="Estado">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Propiedad__ciuda__403A8C7D">
+    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudad">
+        <PropertyRef Name="id_ciudad" />
+      </Principal>
+      <Dependent Role="Propiedad">
+        <PropertyRef Name="ciudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Propiedad__id_co__4BAC3F29">
+    <End Role="Contactos" Type="Self.Contactos" Multiplicity="0..1" />
+    <End Role="Propiedad_Contactos" Type="Self.Propiedad_Contactos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contactos">
+        <PropertyRef Name="id_contactos" />
+      </Principal>
+      <Dependent Role="Propiedad_Contactos">
+        <PropertyRef Name="id_contactos" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Propiedad__id_pr__4CA06362">
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="0..1" />
+    <End Role="Propiedad_Contactos" Type="Self.Propiedad_Contactos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Principal>
+      <Dependent Role="Propiedad_Contactos">
+        <PropertyRef Name="id_propiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario_P__id_pr__440B1D61">
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="0..1" />
+    <End Role="Usuario_Propiedades" Type="Self.Usuario_Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedad">
+        <PropertyRef Name="id_propiedad" />
+      </Principal>
+      <Dependent Role="Usuario_Propiedades">
+        <PropertyRef Name="id_propiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Usuario_P__id_us__4316F928">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario_Propiedades" Type="Self.Usuario_Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Usuario_Propiedades">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PropTechModelStoreContainer">
+    <EntitySet Name="amenidades_propiedad" EntityType="Self.amenidades_propiedad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comunicacion" EntityType="Self.Comunicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contactos" EntityType="Self.Contactos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Propiedad" EntityType="Self.Propiedad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Propiedad_Contactos" EntityType="Self.Propiedad_Contactos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario_Propiedades" EntityType="Self.Usuario_Propiedades" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__amenidade__id_pr__46E78A0C" Association="Self.FK__amenidade__id_pr__46E78A0C">
+      <End Role="Propiedad" EntitySet="Propiedad" />
+      <End Role="amenidades_propiedad" EntitySet="amenidades_propiedad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ciudad__id_estad__3D5E1FD2" Association="Self.FK__Ciudad__id_estad__3D5E1FD2">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Ciudad" EntitySet="Ciudad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comunicac__id_co__4F7CD00D" Association="Self.FK__Comunicac__id_co__4F7CD00D">
+      <End Role="Contactos" EntitySet="Contactos" />
+      <End Role="Comunicacion" EntitySet="Comunicacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Estado__id_pais__3A81B327" Association="Self.FK__Estado__id_pais__3A81B327">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Estado" EntitySet="Estado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Propiedad__ciuda__403A8C7D" Association="Self.FK__Propiedad__ciuda__403A8C7D">
+      <End Role="Ciudad" EntitySet="Ciudad" />
+      <End Role="Propiedad" EntitySet="Propiedad" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Propiedad__id_co__4BAC3F29" Association="Self.FK__Propiedad__id_co__4BAC3F29">
+      <End Role="Contactos" EntitySet="Contactos" />
+      <End Role="Propiedad_Contactos" EntitySet="Propiedad_Contactos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Propiedad__id_pr__4CA06362" Association="Self.FK__Propiedad__id_pr__4CA06362">
+      <End Role="Propiedad" EntitySet="Propiedad" />
+      <End Role="Propiedad_Contactos" EntitySet="Propiedad_Contactos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario_P__id_pr__440B1D61" Association="Self.FK__Usuario_P__id_pr__440B1D61">
+      <End Role="Propiedad" EntitySet="Propiedad" />
+      <End Role="Usuario_Propiedades" EntitySet="Usuario_Propiedades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Usuario_P__id_us__4316F928" Association="Self.FK__Usuario_P__id_us__4316F928">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario_Propiedades" EntitySet="Usuario_Propiedades" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

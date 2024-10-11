@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Proptech.Models.Usuario_Propiedades>
+
+@{
+    ViewBag.Title = "Tabla de Usuario_Propiedades";
+}
+
+<h2>Tabla de Usuario_Propiedades</h2>
+
+
+<div class="row align-items-center justify-content-between">
+    <!-- Botón "Nuevo Usuario_Propiedad" a la izquierda -->
+    <div class="col-md-auto">
+        <a href="@Url.Action("Create")" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Nuevo Usuario_Propiedad
+        </a>
+    </div>
+
+    <!-- Campo de búsqueda y botón de buscar a la derecha -->
+    <div class="col-md-auto">
+        <form asp-action="Index" method="get" class="form-inline">
+            <div class="input-group">
+                <input type="text" name="searchString" class="form-control" placeholder="Buscar usuario_propiedad..." value="@ViewBag.CurrentFilter" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-info">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id_usuario_propiedad)
+            </th>
+            <th>
+                Nombre de Usuario
+            </th>
+            <th>
+                Nombre de Propiedad
+            </th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.id_usuario_propiedad)</td>
+                <td>
+                    <!-- Suponiendo que el nombre de usuario está en item.nombreUsuario -->
+                    @Html.DisplayFor(modelItem => item.id_usuario)
+                </td>
+                <td>
+                    <!-- Suponiendo que el nombre de la propiedad está en item.nombrePropiedad -->
+                    @Html.DisplayFor(modelItem => item.id_propiedad)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.id_usuario_propiedad }, new { @class = "btn btn-success bi bi-pencil-square", title = "Editar" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.id_usuario_propiedad }, new { @class = "btn btn-warning bi bi-eye", title = "Detalles" }) |
+                    @using (Html.BeginForm("Delete", "Usuario_Propiedades", new { id = item.id_usuario_propiedad }, FormMethod.Post, new { @class = "d-inline", title = "Eliminar" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger bi bi-trash" title="Eliminar" onclick="return confirm('Estás seguro que deseas eliminar este Usuario_Propiedad');"></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-light mt-4">
+    <button id="btnGenerarGrafica" class="btn btn-secondary">
+        <i class="bi bi-bar-chart"></i> Generar Gráfica
+    </button>
+</div>
+
+<!-- Aquí se agrega el elemento canvas para la gráfica -->
+<canvas id="myChart" width="400" height="400"></canvas>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        document.getElementById("btnGenerarGrafica").addEventListener("click", function () {
+            fetch('/UsuarioPropiedades/GenerarGrafica')
+                .then(response => response.json())
+                .then(data => {
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.usuarios,
+                            datasets: [{
+                                label: 'Cantidad de Propiedades',
+                                data: data.propiedades,
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+}

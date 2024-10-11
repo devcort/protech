@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Proptech.Models.DTO.Usuario>
+
+@{
+    ViewBag.Title = "Índice de Usuarios";
+}
+
+<h2>Lista de Usuarios</h2>
+
+<div class="row align-items-center justify-content-between">
+    <!-- Botón "Nuevo Usuario" a la izquierda -->
+    <div class="col-md-auto">
+        <a href="@Url.Action("Create")" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Nuevo Usuario
+        </a>
+    </div>
+
+    <!-- Campo de búsqueda y botón de buscar a la derecha -->
+    <div class="col-md-auto">
+        <form asp-action="Index" method="get" class="form-inline">
+            <div class="input-group">
+                <input type="text" name="searchString" class="form-control" placeholder="Buscar usuario..." value="@ViewBag.CurrentFilter" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-info">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.id_usuario)</th>
+            <th>@Html.DisplayNameFor(model => model.nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.correo)</th>
+            <th>@Html.DisplayNameFor(model => model.contraseña)</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.id_usuario)</td>
+                <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.correo)</td>
+                <td>@Html.DisplayFor(modelItem => item.contraseña)</td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.id_usuario }, new { @class = "btn btn-success bi bi-pencil-square", title = "Editar" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.id_usuario }, new { @class = "btn btn-warning bi bi-eye", title = "Detalles" }) |
+                    @using (Html.BeginForm("Delete", "Usuario_Propiedades", new { id = item.id_usuario }, FormMethod.Post, new { @class = "d-inline", title = "Eliminar" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger bi bi-trash" title="Eliminar" onclick="return confirm('Estás seguro que deseas eliminar este Usuario_Propiedad');"></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

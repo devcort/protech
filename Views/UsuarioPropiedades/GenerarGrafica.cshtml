@@ -1,0 +1,42 @@
+﻿@model Proptech.Models.Usuario_Propiedades
+
+@{
+    ViewBag.Title = "GenerarGrafica";
+}
+
+<h2>GenerarGrafica</h2>
+
+<div>
+    <h4>Usuario_Propiedades</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_usuario_propiedad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_usuario_propiedad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_propiedad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_propiedad)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

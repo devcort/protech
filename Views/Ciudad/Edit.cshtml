@@ -1,0 +1,45 @@
+﻿@model Proptech.Models.DTO.Ciudad
+
+@{
+    ViewBag.Title = "Editar Ciudad";
+}
+
+<h2>Editar Ciudad</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Información de la Ciudad</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <!-- Campo id_ciudad (generalmente no editable, así que se podría ocultar) -->
+        @Html.HiddenFor(model => model.id_ciudad)
+
+        <!-- Campo nombre_ciudad -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.nombre_ciudad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nombre_ciudad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nombre_ciudad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Botón de guardar -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary mb-2" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-2">
+    @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-secondary" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Proptech.Models.DTO.Contactos>
+@using System.Linq
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tabla de los Contactos</h2>
+
+<div class="row align-items-center justify-content-between">
+    <!-- Botón "Nue
+    <a href="~/Views/Contacto/Index.cshtml">~/Views/Contacto/Index.cshtml</a>vo Contacto" a la izquierda -->
+    <div class="col-md-auto">
+        <a href="@Url.Action("Create")" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Nuevo Contacto
+        </a>
+    </div>
+
+    <!-- Campo de búsqueda y botón de buscar a la derecha -->
+    <div class="col-md-auto">
+        <form asp-action="Index" method="get" class="form-inline">
+            <div class="input-group">
+                <input type="text" name="searchString" class="form-control" placeholder="Buscar contacto..." value="@ViewBag.CurrentFilter" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-info">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewBag.NombreSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>@Html.DisplayNameFor(model => model.telefono)</th>
+            <th>@Html.DisplayNameFor(model => model.email)</th>
+            <th>@Html.DisplayNameFor(model => model.clasificacion)</th>
+            <th>@Html.DisplayNameFor(model => model.direccion)</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.telefono)</td>
+                <td>@Html.DisplayFor(modelItem => item.email)</td>
+                <td>@Html.DisplayFor(modelItem => item.clasificacion)</td>
+                <td>@Html.DisplayFor(modelItem => item.direccion)</td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.id_contactos }, new { @class = "btn btn-success bi bi-pencil-square", title = "Editar" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.id_contactos }, new { @class = "btn btn-warning bi bi-eye", title = "Detalles" }) |
+                    @using (Html.BeginForm("Delete", "Contacto", new { id = item.id_contactos }, FormMethod.Post, new { @class = "d-inline", title = "Eliminar" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger bi bi-trash" title="Eliminar" onclick="return confirm('Estás seguro que deseas eliminar el Contacto');"></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

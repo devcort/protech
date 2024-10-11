@@ -1,0 +1,66 @@
+﻿@model Proptech.Models.DTO.Contactos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles del Contacto</h2>
+
+<div class="card">
+    <div class="card-header">
+        Información de Contacto
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.id_contactos)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.id_contactos)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.telefono)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.telefono)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.email)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.email)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.clasificacion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.clasificacion)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.direccion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.direccion)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class=" text-center">
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id_contactos }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-secondary" })
+</p>
+
+</div>

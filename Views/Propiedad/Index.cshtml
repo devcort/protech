@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Proptech.Models.DTO.Propiedad>
+
+@{
+    ViewBag.Title = "Índice de Propiedades";
+}
+
+<h2>Lista de Propiedades</h2>
+
+<div class="row align-items-center justify-content-between">
+    <!-- Botón "Nueva Propiedad" a la izquierda -->
+    <div class="col-md-auto">
+        <a href="@Url.Action("Create")" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Nueva Propiedad
+        </a>
+    </div>
+
+    <!-- Campo de búsqueda y botón de buscar a la derecha -->
+    <div class="col-md-auto">
+        <form asp-action="Index" method="get" class="form-inline">
+            <div class="input-group">
+                <input type="text" name="searchString" class="form-control" placeholder="Buscar propiedad..." value="@ViewBag.CurrentFilter" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-info">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.direccion)</th>
+            <th>@Html.DisplayNameFor(model => model.terreno)</th>
+            <th>@Html.DisplayNameFor(model => model.ciudad)</th>
+            <th>@Html.DisplayNameFor(model => model.num_cuartos)</th>
+            <th>@Html.DisplayNameFor(model => model.num_baños)</th>
+            <th>@Html.DisplayNameFor(model => model.num_pisos)</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.direccion)</td>
+                <td>@Html.DisplayFor(modelItem => item.terreno)</td>
+                <td>@Html.DisplayFor(modelItem => item.ciudad)</td>
+                <td>@Html.DisplayFor(modelItem => item.num_cuartos)</td>
+                <td>@Html.DisplayFor(modelItem => item.num_baños)</td>
+                <td>@Html.DisplayFor(modelItem => item.num_pisos)</td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.id_propiedad }, new { @class = "btn btn-success bi bi-pencil-square", title = "Editar" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.id_propiedad }, new { @class = "btn btn-warning bi bi-eye", title = "Detalles" }) |
+                    @using (Html.BeginForm("Delete", "Usuario_Propiedades", new { id = item.id_propiedad }, FormMethod.Post, new { @class = "d-inline", title = "Eliminar" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger bi bi-trash" title="Eliminar" onclick="return confirm('Estás seguro que deseas eliminar este Usuario_Propiedad');"></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

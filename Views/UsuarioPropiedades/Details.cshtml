@@ -1,0 +1,48 @@
+﻿@model Proptech.Models.Usuario_Propiedades
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles de Usuario_Propiedades</h2>
+
+<div class="card">
+    <div class="card-header">
+        Información de Usuario_Propiedades
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.id_usuario_propiedad)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.id_usuario_propiedad)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.id_usuario)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.id_usuario)
+                <!-- Suponiendo que el nombre de usuario está en ViewBag.usuarioNombre -->
+                <span>@ViewBag.usuarioNombre</span>
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.id_propiedad)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.id_propiedad)
+                <!-- Suponiendo que el nombre de la propiedad está en ViewBag.propiedadNombre -->
+                <span>@ViewBag.propiedadNombre</span>
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="text-center">
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.id_usuario_propiedad }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-secondary" })
+    </p>
+    </

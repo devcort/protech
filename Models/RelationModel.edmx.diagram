@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f63c7d0857b5436ea1819f5780f189a7" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="PropTechModel.amenidades_propiedad" Width="1.5" PointX="9.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.Ciudad" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.Comunicacion" Width="1.5" PointX="12" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.Contactos" Width="1.5" PointX="14.375" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.Estado" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.Pais" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.Propiedad" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.Propiedad_Contactos" Width="1.5" PointX="9.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.Usuario" Width="1.5" PointX="17.125" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropTechModel.Usuario_Propiedades" Width="2.625" PointX="9.75" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="PropTechModel.FK__amenidade__id_pr__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="PropTechModel.FK__Ciudad__id_estad__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="PropTechModel.FK__Propiedad__ciuda__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="PropTechModel.FK__Comunicac__id_co__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="PropTechModel.FK__Propiedad__id_co__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="PropTechModel.FK__Estado__id_pais__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="PropTechModel.FK__Propiedad__id_pr__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="PropTechModel.FK__Usuario_P__id_pr__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="PropTechModel.FK__Usuario_P__id_us__4316F928" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

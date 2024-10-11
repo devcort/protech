@@ -1,0 +1,55 @@
+﻿@model Proptech.Models.DTO.Usuario
+
+@{
+    ViewBag.Title = "Detalles del Usuario";
+}
+
+<h2>Detalles del Usuario</h2>
+
+<div class="card">
+    <div class="card-header">
+        Información del Usuario
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <!-- ID del Usuario -->
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.id_usuario)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.id_usuario)
+            </dd>
+
+            <!-- Nombre -->
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <!-- Correo -->
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.correo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.correo)
+            </dd>
+
+            <!-- Contraseña -->
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.contraseña)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.contraseña)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="text-center">
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.id_usuario }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-secondary" })
+    </p>
+</div>

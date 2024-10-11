@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Proptech.Models.DTO.Ciudad>
+
+@{
+    ViewBag.Title = "Índice de Ciudades";
+}
+
+<h2>Lista de Ciudades</h2>
+
+<div class="row align-items-center justify-content-between">
+    <!-- Botón "Nueva Ciudad" a la izquierda -->
+    <div class="col-md-auto">
+        <a href="@Url.Action("Create")" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Nueva Ciudad
+        </a>
+    </div>
+
+    <!-- Campo de búsqueda y botón de buscar a la derecha -->
+    <div class="col-md-auto">
+        <form asp-action="Index" method="get" class="form-inline">
+            <div class="input-group">
+                <input type="text" name="searchString" class="form-control" placeholder="Buscar ciudad..." value="@ViewBag.CurrentFilter" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-info">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.id_ciudad)</th>
+            <th>@Html.DisplayNameFor(model => model.nombre_ciudad)</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.id_ciudad)</td>
+                <td>@Html.DisplayFor(modelItem => item.nombre_ciudad)</td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.id_ciudad }, new { @class = "btn btn-success bi bi-pencil-square", title = "Editar" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.id_ciudad }, new { @class = "btn btn-warning bi bi-eye", title = "Detalles" }) |
+                    @using (Html.BeginForm("Delete", "Ciudad", new { id = item.id_ciudad }, FormMethod.Post, new { @class = "d-inline", title = "Eliminar" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger bi bi-trash" title="Eliminar" onclick="return confirm('Estás seguro que deseas eliminar esta Ciudad');"></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@{
+    var ciudadesUnicas = Model.Select(contacto => contacto.id_ciudad).Distinct().Count();
+
+}
+<div>
+    <p>Número de ciudades únicas: @ciudadesUnicas</p>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
